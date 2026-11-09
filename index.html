@@ -1,0 +1,1290 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fcebed">
+
+<title>Our Anniversary ♡</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =================================
+   GLOBAL STYLE
+================================= */
+
+:root {
+    --pink: #e9aeba;
+    --soft-pink: #fcebed;
+    --cream: #fffaf5;
+    --dark: #76515b;
+    --muted: #ae858d;
+    --rose: #c87f90;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    min-height: 100svh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 35px 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: flex;
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(8deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* FLOATING DECORATION */
+
+.decoration {
+    position: absolute;
+    color: #d99aa7;
+    opacity: 0.5;
+    font-size: 25px;
+    animation: float 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.d1 { top: 12%; left: 12%; }
+.d2 { top: 20%; right: 13%; animation-delay: 1s; }
+.d3 { bottom: 15%; left: 15%; animation-delay: 2s; }
+.d4 { bottom: 20%; right: 12%; animation-delay: 1.5s; }
+
+/* =================================
+   BUTTON
+================================= */
+
+.main-btn {
+    padding: 14px 28px;
+    border-radius: 30px;
+    background: var(--rose);
+    color: white;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 7px 18px #c87f9033;
+    transition: 0.3s;
+}
+
+.main-btn:hover {
+    background: #b96e80;
+    transform: translateY(-3px);
+}
+
+.main-btn:focus-visible,
+.arrow-btn:focus-visible,
+.music-btn:focus-visible {
+    outline: 3px solid #b96e80;
+    outline-offset: 4px;
+}
+
+/* =================================
+   SCREEN 1 - ENVELOPE
+================================= */
+
+#homeScreen {
+    background: linear-gradient(
+        135deg,
+        #fff8f1,
+        #fce5e9,
+        #fff1eb
+    );
+    text-align: center;
+}
+
+.intro {
+    margin-bottom: 50px;
+}
+
+.intro small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    margin-bottom: 17px;
+}
+
+.intro h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 7vw, 45px);
+    line-height: 1.35;
+}
+
+.intro p {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.envelope-container {
+    position: relative;
+    width: 280px;
+    height: 185px;
+    margin: 10px auto 35px;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.4s;
+}
+
+.envelope-container:hover {
+    transform: translateY(-6px);
+}
+
+.envelope {
+    position: absolute;
+    inset: 0;
+    background: #e6a9b5;
+    border-radius: 5px;
+    box-shadow: 0 15px 35px #9f667522;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #f4c6ce;
+    clip-path: polygon(0 0, 50% 58%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.8s ease;
+    z-index: 3;
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #d993a2;
+    clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+    z-index: 4;
+}
+
+.inside-letter {
+    position: absolute;
+    width: 85%;
+    height: 145px;
+    left: 7.5%;
+    bottom: 5px;
+    background: #fffdf8;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 27px;
+    color: var(--rose);
+    z-index: 2;
+    transition: transform 5s ease;
+}
+
+.heart-seal {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #bd7284;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+    transition: opacity 3s;
+}
+
+.envelope-container.open .envelope::before {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-container.open .inside-letter {
+    transform: translateY(-85px);
+}
+
+.envelope-container.open .heart-seal {
+    opacity: 0;
+}
+
+.hint {
+    margin-top: 18px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* =================================
+   SCREEN 2 - LOVE LETTER
+================================= */
+
+#letterScreen {
+    background: linear-gradient(135deg, #fff6ef, #fce7eb);
+    padding-top: 85px;
+    padding-bottom: 45px;
+}
+
+.music-btn {
+    position: fixed;
+    z-index: 20;
+    top: 18px;
+    right: 18px;
+    border: 1px solid #eccbd0;
+    background: #ffffffdf;
+    color: var(--dark);
+    padding: 11px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    box-shadow: 0 4px 15px #9f667511;
+}
+
+.letter-paper {
+    width: 100%;
+    max-width: 590px;
+    background: #fffdf8;
+    border: 1px solid #f0e5dc;
+    padding: 45px 48px;
+    border-radius: 5px;
+    box-shadow: 0 15px 50px #9f66751c;
+    position: relative;
+    line-height: 1.9;
+}
+
+.letter-paper::after {
+    content: "♡";
+    position: absolute;
+    right: 22px;
+    top: 12px;
+    color: #e4aab5;
+    font-size: 28px;
+}
+
+.letter-top {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--rose);
+    margin-bottom: 30px;
+}
+
+.letter-paper h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 22px;
+}
+
+.letter-paper p {
+    font-size: 13px;
+    color: #80676d;
+    margin-bottom: 16px;
+    text-align: justify;
+}
+
+.signature {
+    text-align: right;
+    margin-top: 25px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 27px;
+    color: var(--rose);
+}
+
+.letter-footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* =================================
+   SCREEN 3 - PHOTO MEMORIES
+================================= */
+
+#memoryScreen {
+    background: linear-gradient(140deg, #fff6ef, #fbe3e8);
+    text-align: center;
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+.memory-heading {
+    margin-bottom: 25px;
+}
+
+.memory-heading small {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--muted);
+}
+
+.memory-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(29px, 6vw, 40px);
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.memory-heading p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 9px;
+}
+
+.slider-wrapper {
+    width: 100%;
+    max-width: 410px;
+    touch-action: pan-y;
+}
+
+.photo-card {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.photo-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.photo-date {
+    margin-top: 18px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #bc8791;
+    text-transform: uppercase;
+}
+
+.photo-caption {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    color: #76515b;
+    margin-top: 8px;
+}
+
+.photo-description {
+    font-size: 12px;
+    color: #a17c83;
+    margin-top: 7px;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.arrow-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    color: var(--rose);
+    font-size: 21px;
+    box-shadow: 0 3px 12px #9f667522;
+    transition: 0.3s;
+}
+
+.arrow-btn:hover {
+    background: var(--rose);
+    color: white;
+}
+
+.counter {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--muted);
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    background: #e7c5cc;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.dot.active {
+    width: 22px;
+    background: var(--rose);
+}
+
+/* =================================
+   SCREEN 4 - CLOSING
+================================= */
+
+.closing {
+    display: none;
+    width: 100%;
+    max-width: 430px;
+    text-align: center;
+    padding: 25px 12px;
+    animation: fadeIn 1s ease;
+}
+
+.closing.show {
+    display: block;
+}
+
+.big-heart {
+    font-size: 65px;
+    color: var(--rose);
+    animation: pulse 2s infinite;
+    margin-bottom: 20px;
+}
+
+.closing h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(29px, 6vw, 38px);
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+.closing p {
+    font-size: 13px;
+    line-height: 2;
+    color: #98777e;
+    margin-bottom: 28px;
+}
+
+.closing .small-signature {
+    font-family: 'Dancing Script', cursive;
+    color: var(--rose);
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 480px) {
+
+    .envelope-container {
+        width: 255px;
+        height: 170px;
+    }
+
+    .intro {
+        margin-bottom: 40px;
+    }
+
+    .letter-paper {
+        padding: 40px 24px;
+    }
+
+    .letter-paper h2 {
+        font-size: 25px;
+    }
+
+    .letter-paper p {
+        font-size: 12px;
+    }
+
+    .photo-card img {
+        height: 300px;
+    }
+
+    .music-btn {
+        top: 12px;
+        right: 12px;
+    }
+
+}
+
+@media (max-height: 700px) {
+    .photo-card img {
+        height: 230px;
+    }
+
+    #memoryScreen {
+        padding-top: 25px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =================================
+     MUSIC
+================================= -->
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="Banda Neira - Sampai Jadi Debu (mp3cut.net).mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- =================================
+     SCREEN 1: ENVELOPE
+================================= -->
+
+<section id="homeScreen" class="screen active">
+
+    <span class="decoration d1">♡</span>
+    <span class="decoration d2">✿</span>
+    <span class="decoration d3">♡</span>
+    <span class="decoration d4">✧</span>
+
+    <div class="intro">
+
+        <small>A LITTLE SURPRISE FOR YOU</small>
+
+        <h1>
+            Happy 3rd Anniversary,<br>
+            My Favorite Person ♡
+        </h1>
+
+        <p>
+            Three years, countless memories, one special person.
+        </p>
+
+    </div>
+
+    <div class="envelope-container"
+         id="envelope"
+         onclick="openEnvelope()"
+         role="button"
+         tabindex="0"
+         aria-label="Buka amplop">
+
+        <div class="envelope"></div>
+
+        <div class="inside-letter">
+            For My Love ♡
+        </div>
+
+        <div class="heart-seal">♥</div>
+
+    </div>
+
+    <button class="main-btn" onclick="openEnvelope()">
+        Open Your Letter ♡
+    </button>
+
+    <p class="hint">
+        ✧ Tap the envelope to open your surprise ✧
+    </p>
+
+</section>
+
+
+<!-- =================================
+     SCREEN 2: LOVE LETTER
+================================= -->
+
+<section id="letterScreen" class="screen">
+
+    <button class="music-btn" onclick="toggleMusic()">
+        <span id="musicIcon">♫</span>
+        <span id="musicText">Pause Music</span>
+    </button>
+
+    <div class="letter-paper">
+
+        <div class="letter-top">
+            A LETTER FROM MY HEART
+        </div>
+
+        <h2>To My Favorite Person, ♡</h2>
+
+        <p>
+            Hai, sayang...
+        </p>
+
+        <p>
+            Happy 3rd Anniversary untuk kita.
+            Ngga terasa sudah tiga tahun kita menjalani
+            perjalanan ini bersama. Tiga tahun yang berisikan
+            banyak cerita, sedih, kecewa, ceria, dan berbagai
+            pengalaman yang bikin perjalanan kita penuh warna.
+        </p>
+
+        <p>
+            Aku mungkin ga selalu bisa mengungkapkan
+            semuanya dengan kata-kata. Tapi aku ingin kamu
+            tau bahwa adanya kamu di hidup aku adalah salah satu orang
+            yang berharga dalam hidup aku. Terima kasih sudah
+            menjadi bagian dari hari-hari aku.
+        </p>
+
+        <p>
+            Di hubungan kita memang tidak selalu menjalani hari yang
+            sempurna. Ada perbedaan pendapat, kesalahpahaman,
+            dan hal-hal kecil yang terkadang tidak mudah.
+            Tapi dari semuanya, aku belajar bahwa sebuah
+            hubungan bukan tentang menjadi sempurna,
+            melainkan tentang saling memahami, menghargai,
+            dan terus berusaha bersama.
+        </p>
+
+        <p>
+            Di anniversary yang ketiga ini, aku berharap
+            semoga kita bisa terus tumbuh menjadi pribadi
+            yang lebih baik. Semoga kita selalu diberi
+            kesempatan untuk membuat lebih banyak cerita,
+            cari tempat makan yang enak, nge gigs bareng bareng terus,
+            dan saling support setiap mimpi kita masing masing.
+        </p>
+
+        <p>
+            Pokoknya aku akan selalu berusaha dan mengusahakan
+            apapun itu agar hubungan kita terus bertahan. Ya yang kamu tau
+            memang ga gampang buat melewati rasa kecewa yang sebesar itu,
+            tapi apa nyatanya aku masih mau dan selalu berusaha untuk melewati itu semua 
+            dan sampai di titik setiap ada masalah itu bukan buat dilupakan
+            tapi terus berjalan berdampingan untuk mengevaluasi supaya
+             hubungan kita terus terjaga.
+        </p>
+
+        <p>
+            Terima kasih sudah selalu menjadi orang paling baik,
+            disaat semua orang disekitar aku mulai tidak sejalan dan tidak 
+            lagi sama. makasih udah selalu mengusahakan dukung aku mau dari hobi,
+            mimpi aku, kuliah aku, dan semuanya yang aku rasa di setiap kegiatan Aku
+            kamu selalu dukung itu.
+        </p>
+
+        <p>
+            Terima kasih sudah bertahan dan berjalan
+            sejauh ini bersama aku. Aku gaakan tau nanti kedepannya
+            bakal seperti apa, tapi
+            aku berharap akan ada lebih banyak halaman
+            indah yang bisa kita tulis bersama.
+        </p>
+
+        <p>
+            Once again, happy anniversary, sayang.
+            Three years down, and hopefully many more
+            beautiful memories to come.
+        </p>
+
+        <div class="signature">
+            With all my love,<br>
+            Your favorite person ♡
+        </div>
+
+    </div>
+
+    <div class="letter-footer">
+
+        <button class="main-btn" onclick="goToMemories()">
+            Let's See Our Memories ➜
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =================================
+     SCREEN 3: OUR MEMORIES
+================================= -->
+
+<section id="memoryScreen" class="screen">
+
+    <div class="memory-heading" id="memoryHeading">
+
+        <small>THREE YEARS OF US</small>
+
+        <h2>Our Journey Together ♡</h2>
+
+        <p>
+            Every picture has a story, and every story has you.
+        </p>
+
+    </div>
+
+    <div class="slider-wrapper" id="sliderWrapper">
+
+        <div class="photo-card" id="photoCard">
+
+            <img id="memoryImage"
+                 src="foto1.jpeg"
+                 alt="Foto kenangan kita">
+
+            <div class="photo-date" id="memoryDate">
+                Our First Moment
+            </div>
+
+            <div class="photo-caption" id="memoryCaption">
+                The Beginning ♡
+            </div>
+
+            <div class="photo-description" id="memoryDescription">
+                Pertama kali kita foto bareng dan pada saat itu juga momentum aku merasa dekat.
+            </div>
+
+        </div>
+
+        <div class="slider-controls">
+
+            <button class="arrow-btn"
+                    onclick="changeSlide(-1)"
+                    aria-label="Foto sebelumnya">
+                &#8592;
+            </button>
+
+            <span class="counter" id="counter">
+                01 / 04
+            </span>
+
+            <button class="arrow-btn"
+                    onclick="changeSlide(1)"
+                    aria-label="Foto selanjutnya">
+                &#8594;
+            </button>
+
+        </div>
+
+        <div class="dots" id="dots"></div>
+
+    </div>
+
+
+    <!-- CLOSING -->
+
+    <div class="closing" id="closing">
+
+        <div class="big-heart">♡</div>
+
+        <h2>Three Years, Still You.</h2>
+
+        <p>
+            Tiga tahun mungkin hanya sebuah angka,
+            tetapi setiap momen di dalamnya punya cerita
+            yang sangat berarti.
+            <br><br>
+            Terima kasih sudah menjadi bagian dari
+            perjalanan ini. Semoga kita masih punya
+            banyak waktu untuk menciptakan kenangan
+            yang lebih indah.
+            <br><br>
+            No matter how many pages our story has,
+            I hope we keep writing it together.
+            <br>
+            NAUFAL ♡ SABINA
+        </p>
+
+        <div class="small-signature">
+            Happy Anniversary, My Love ♡
+        </div>
+
+        <button class="main-btn" onclick="restartWebsite()">
+            ↻ kalau mau buka amplopnya pencet ini lagi ♡
+        </button>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =================================
+   1. PERSONALISASI WEBSITE
+================================= */
+
+const CONFIG = {
+
+    partnerName: "Sabina Laiqa Halima",
+
+    anniversaryNumber: 3,
+
+    startDate: "11/11/2024",
+
+    senderName: "Muhammad Naufal Saputra"
+
+};
+
+
+/* =================================
+   2. DATA FOTO KENANGAN
+================================= */
+
+const memories = [
+
+    {
+        image: "foto1.jpeg",
+        date: "Our Beginning",
+        caption: "The Beginning ♡",
+        description: "Semua cerita indah kita dimulai dari sini. Dari foto ini akhirnya kita bisa ketemu lagi setelah terakhir ketemu di senayan, dan akhirnya kita main dan ke warkop"
+    },
+
+    {
+        image: "foto2.jpeg",
+        date: "One of Our Best Days",
+        caption: "Unforgettable day",
+        description: "Hari dimana kita terakhir ketemu sebagai teman dan setelah kita berpisah pada hari itu, kita official pacaran yeayy heheheh"
+    },
+
+    {
+        image: "foto3.jpeg",
+        date: "The First Year",
+        caption: "The Lot of Experience",
+        description: "Ini tahun petama aku pacaran sama kamu, banyak banget pengalaman pengalaman baru dari pacaran sama anak asrama lah, nonton lomba lah, sampe ketemu papa kamu yang begitu kaku di tahun pertama ini"
+    },
+
+    {
+        image: "foto4.jpeg",
+        date: "Second Years Together",
+        caption: "Still My Favorite ♡",
+        description: "Ga berasa dari semua yang udah kita laluin eh sudah 2 tahun aja kita bareng bareng, padahal pada saat itu pada momen itu aku ngerasa berat banget buat ngejalanin hubungan ini lagi. Tapi apa lagi lagi kita buktikan sampai pada saat itu dan sampai detik ini kita bisa dan berhasil."
+    }
+
+];
+
+
+/* =================================
+   3. VARIABEL UTAMA
+================================= */
+
+let currentSlide = 0;
+let isOpened = false;
+
+const music = document.getElementById("bgMusic");
+
+
+/* =================================
+   4. PERSONALISASI TEKS
+================================= */
+
+function initializeWebsite() {
+
+    const name = CONFIG.partnerName || "Sayang";
+
+    document.title =
+        "Happy " + CONFIG.anniversaryNumber + "th Anniversary ♡";
+
+    document.querySelector(".intro h1").innerHTML =
+        "Happy " + CONFIG.anniversaryNumber +
+        "th Anniversary,<br>" + name + " ♡";
+
+    document.querySelector(".letter-paper h2").textContent =
+        "To My Favorite Person, " + name + " ♡";
+
+    document.querySelector(".closing h2").textContent =
+        CONFIG.anniversaryNumber + " Years, Still You.";
+
+    document.querySelector(".small-signature").textContent =
+        "Happy Anniversary, " + name + " ♡";
+
+    document.querySelector(".signature").innerHTML =
+        "With all my love,<br>" + CONFIG.senderName + " ♡";
+
+}
+
+
+/* =================================
+   5. NAVIGASI HALAMAN
+================================= */
+
+function showScreen(screenId) {
+
+    document.querySelectorAll(".screen").forEach(screen => {
+
+        screen.classList.remove("active");
+
+    });
+
+    document.getElementById(screenId).classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =================================
+   6. BUKA AMPLOP
+================================= */
+
+function openEnvelope() {
+
+    if (isOpened) return;
+
+    isOpened = true;
+
+    document.getElementById("envelope").classList.add("open");
+
+    // Musik diputar setelah interaksi pengguna.
+    music.play()
+        .then(updateMusicButton)
+        .catch(error => {
+            console.log("Musik belum dapat diputar:", error);
+        });
+
+    // Transisi ke surat.
+    setTimeout(() => {
+
+        showScreen("letterScreen");
+
+    }, 1100);
+
+}
+
+
+/* =================================
+   7. KONTROL MUSIK
+================================= */
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        music.play()
+            .then(updateMusicButton)
+            .catch(error => {
+                console.log("Gagal memutar musik:", error);
+            });
+
+    } else {
+
+        music.pause();
+
+        updateMusicButton();
+
+    }
+
+}
+
+
+function updateMusicButton() {
+
+    const icon = document.getElementById("musicIcon");
+
+    const text = document.getElementById("musicText");
+
+    if (music.paused) {
+
+        icon.textContent = "♫";
+
+        text.textContent = "Play Music";
+
+    } else {
+
+        icon.textContent = "Ⅱ";
+
+        text.textContent = "Pause Music";
+
+    }
+
+}
+
+
+/* =================================
+   8. MASUK KE SLIDER KENANGAN
+================================= */
+
+function goToMemories() {
+
+    currentSlide = 0;
+
+    document.getElementById("memoryHeading").style.display =
+        "block";
+
+    document.getElementById("sliderWrapper").style.display =
+        "block";
+
+    document.getElementById("closing").classList.remove("show");
+
+    showScreen("memoryScreen");
+
+    renderSlide();
+
+}
+
+
+/* =================================
+   9. RENDER FOTO
+================================= */
+
+function renderSlide() {
+
+    const memory = memories[currentSlide];
+
+    const card = document.getElementById("photoCard");
+
+    const image = document.getElementById("memoryImage");
+
+    image.src = memory.image;
+
+    image.alt = memory.caption;
+
+    document.getElementById("memoryDate").textContent =
+        memory.date;
+
+    document.getElementById("memoryCaption").textContent =
+        memory.caption;
+
+    document.getElementById("memoryDescription").textContent =
+        memory.description;
+
+    document.getElementById("counter").textContent =
+        String(currentSlide + 1).padStart(2, "0") +
+        " / " +
+        String(memories.length).padStart(2, "0");
+
+    // Mengulang animasi foto.
+
+    card.style.animation = "none";
+
+    void card.offsetWidth;
+
+    card.style.animation = "fadeIn 0.5s ease";
+
+    // Membuat indikator foto.
+
+    const dots = document.getElementById("dots");
+
+    dots.innerHTML = "";
+
+    memories.forEach((item, index) => {
+
+        const dot = document.createElement("button");
+
+        dot.className =
+            index === currentSlide ? "dot active" : "dot";
+
+        dot.setAttribute(
+            "aria-label",
+            "Lihat foto " + (index + 1)
+        );
+
+        dot.addEventListener("click", () => {
+
+            currentSlide = index;
+
+            renderSlide();
+
+        });
+
+        dots.appendChild(dot);
+
+    });
+
+}
+
+
+/* =================================
+   10. NEXT DAN PREVIOUS
+================================= */
+
+function changeSlide(direction) {
+
+    const nextSlide = currentSlide + direction;
+
+    // Tombol sebelumnya.
+
+    if (nextSlide < 0) {
+
+        currentSlide = 0;
+
+        renderSlide();
+
+        return;
+
+    }
+
+    // Jika melewati foto terakhir,
+    // tampilkan halaman penutup.
+
+    if (nextSlide >= memories.length) {
+
+        showClosing();
+
+        return;
+
+    }
+
+    currentSlide = nextSlide;
+
+    renderSlide();
+
+}
+
+
+/* =================================
+   11. HALAMAN PENUTUP
+================================= */
+
+function showClosing() {
+
+    document.getElementById("memoryHeading").style.display =
+        "none";
+
+    document.getElementById("sliderWrapper").style.display =
+        "none";
+
+    document.getElementById("closing").classList.add("show");
+
+}
+
+
+/* =================================
+   12. SWIPE FOTO DI HP
+================================= */
+
+let touchStartX = 0;
+
+let touchEndX = 0;
+
+const slider = document.getElementById("sliderWrapper");
+
+slider.addEventListener("touchstart", function(event) {
+
+    touchStartX = event.changedTouches[0].screenX;
+
+}, { passive: true });
+
+
+slider.addEventListener("touchend", function(event) {
+
+    touchEndX = event.changedTouches[0].screenX;
+
+    const distance = touchEndX - touchStartX;
+
+    if (Math.abs(distance) > 50) {
+
+        if (distance < 0) {
+
+            changeSlide(1);
+
+        } else {
+
+            changeSlide(-1);
+
+        }
+
+    }
+
+}, { passive: true });
+
+
+/* =================================
+   13. ULANGI DARI AWAL
+================================= */
+
+function restartWebsite() {
+
+    currentSlide = 0;
+
+    isOpened = false;
+
+    music.pause();
+
+    music.currentTime = 0;
+
+    document.getElementById("envelope").classList.remove("open");
+
+    document.getElementById("memoryHeading").style.display =
+        "block";
+
+    document.getElementById("sliderWrapper").style.display =
+        "block";
+
+    document.getElementById("closing").classList.remove("show");
+
+    updateMusicButton();
+
+    showScreen("homeScreen");
+
+}
+
+
+/* =================================
+   14. AKTIVASI KODE
+================================= */
+
+document.getElementById("envelope").addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter" || event.key === " ") {
+
+            event.preventDefault();
+
+            openEnvelope();
+
+        }
+
+    }
+);
+
+initializeWebsite();
+
+renderSlide();
+
+</script>
+
+</body>
+</html>
